@@ -3,6 +3,8 @@ import type { Category } from './utils';
 
 type Stage = 'input' | 'result';
 
+const STORAGE_KEY = 'my_name';
+
 interface AppState {
   isIntro: boolean;
   nameA: string;
@@ -23,19 +25,31 @@ interface AppState {
 
 export const useAppStore = create<AppState>((set) => ({
   isIntro: true,
-  nameA: '',
+  nameA: localStorage.getItem(STORAGE_KEY) ?? '',
   nameB: '',
   category: '연인',
   stage: 'input',
   shouldFocusNameB: false,
 
   startApp: () => set({ isIntro: false }),
-
   setNameA: (name) => set({ nameA: name.slice(0, 15) }),
   setNameB: (name) => set({ nameB: name.slice(0, 15) }),
   setCategory: (category) => set({ category }),
-  showResult: () => set({ stage: 'result' }),
+  showResult: () => {
+    set((state) => {
+      if (state.nameA.trim()) {
+        localStorage.setItem(STORAGE_KEY, state.nameA.trim());
+      }
+      return { stage: 'result' };
+    });
+  },
   tryAnother: () => set({ nameB: '', stage: 'input', shouldFocusNameB: true }),
-  resetAll: () => set({ nameA: '', nameB: '', category: '연인', stage: 'input', shouldFocusNameB: false }),
+  resetAll: () => set({
+    nameA: localStorage.getItem(STORAGE_KEY) ?? '',
+    nameB: '',
+    category: '연인',
+    stage: 'input',
+    shouldFocusNameB: false,
+  }),
   clearFocusFlag: () => set({ shouldFocusNameB: false }),
 }));
