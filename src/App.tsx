@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Share2, Heart, Users, Briefcase } from 'lucide-react';
 import { useAppStore } from './store';
@@ -153,9 +153,11 @@ function InputStage() {
 }
 
 function ResultStage() {
-  const { nameA, nameB, category, tryAnother } = useAppStore();
+  const { nameA, nameB, category, setCategory, tryAnother } = useAppStore();
+  const [showOtherCategories, setShowOtherCategories] = useState(false);
   const score = calculateScore(nameA, nameB, category);
   const { text, colorClass } = getResultInfo(score);
+  const otherCategories = CATEGORIES.filter((c) => c !== category);
 
   return (
     <motion.div
@@ -166,10 +168,19 @@ function ResultStage() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="result-names">
-        <span className="result-name">{nameA}</span>
-        <span className="result-icon">{CATEGORY_ICON[category]}</span>
-        <span className="result-name">{nameB}</span>
+      <div className="result-names-card">
+        <div className="result-name-box">
+          <span className="result-name-label">나</span>
+          <span className="result-name">{nameA}</span>
+        </div>
+        <div className="result-connector">
+          <span className="result-icon">{CATEGORY_ICON[category]}</span>
+          <span className="result-category-label">{category}</span>
+        </div>
+        <div className="result-name-box">
+          <span className="result-name-label">상대</span>
+          <span className="result-name">{nameB}</span>
+        </div>
       </div>
 
       <motion.div
@@ -190,9 +201,26 @@ function ResultStage() {
         {text}
       </motion.p>
 
-      <button className="try-another-button" onClick={tryAnother}>
-        다른 이름이랑 하기
-      </button>
+      {showOtherCategories ? (
+        <div className="other-category-buttons">
+          {otherCategories.map((cat) => (
+            <button
+              key={cat}
+              className="category-tab active"
+              onClick={() => {
+                setCategory(cat);
+                setShowOtherCategories(false);
+              }}
+            >
+              {CATEGORY_ICON[cat]} {cat}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <button className="try-another-button" onClick={() => setShowOtherCategories(true)}>
+          다른 궁합도 보기
+        </button>
+      )}
     </motion.div>
   );
 }

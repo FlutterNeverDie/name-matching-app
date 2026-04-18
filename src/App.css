@@ -212,21 +212,60 @@
 }
 
 /* ── Result Stage ── */
-.result-names {
+.result-names-card {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  margin-bottom: 28px;
+}
+
+.result-name-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-name-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .result-name {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
+  text-align: center;
+  word-break: break-all;
+}
+
+.result-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .result-icon {
   font-size: 28px;
+  line-height: 1;
+}
+
+.result-category-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .score-display {
@@ -265,6 +304,12 @@
 
 .result-text.result-high {
   color: #FFD700;
+}
+
+/* ── Other Category Buttons ── */
+.other-category-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 /* ── Try Another Button ── */
