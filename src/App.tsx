@@ -18,12 +18,12 @@ function IntroStage() {
       transition={{ duration: 0.4, ease: 'easeOut' }}
     >
       <motion.div
-        className="intro-emoji"
+        className="intro-logo"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.5 }}
       >
-        🔮
+        <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="우리 사이 궁합은?" />
       </motion.div>
 
       <motion.h1
