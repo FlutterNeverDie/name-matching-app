@@ -12,7 +12,11 @@ export function calculateScore(nameA: string, nameB: string, category: Category)
   for (let i = 0; i < combined.length; i++) {
     sum += combined.charCodeAt(i);
   }
-  return (sum + CATEGORY_SALT[category]) % 11;
+  const raw = (sum + CATEGORY_SALT[category]) % 11;
+  if (raw <= 5 && Math.random() < 0.5) {
+    return Math.floor(Math.random() * 4) + 7; // 7~10 랜덤
+  }
+  return raw;
 }
 
 export function getResultInfo(score: number): { text: string; colorClass: string } {
