@@ -6,6 +6,11 @@ const CATEGORY_SALT: Record<Category, number> = {
   '사업': 1,
 };
 
+// 0~10 균등 분포 → 높은 점수 쪽으로 치우친 분포로 리매핑
+// 결과: 3(9%), 5(9%), 6(18%), 7(18%), 8(18%), 9(18%), 10(9%)
+// ≤6 비중 약 36%, ≥7 비중 약 64% (3.5 : 6.5)
+const SCORE_MAP = [3, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10] as const;
+
 export function calculateScore(nameA: string, nameB: string, category: Category): number {
   const combined = nameA + nameB;
   let sum = 0;
@@ -13,10 +18,7 @@ export function calculateScore(nameA: string, nameB: string, category: Category)
     sum += combined.charCodeAt(i);
   }
   const raw = (sum + CATEGORY_SALT[category]) % 11;
-  if (raw <= 5 && Math.random() < 0.5) {
-    return Math.floor(Math.random() * 4) + 7; // 7~10 랜덤
-  }
-  return raw;
+  return SCORE_MAP[raw];
 }
 
 export function getResultInfo(score: number): { text: string; colorClass: string } {
