@@ -1,0 +1,312 @@
+/* ── Container ── */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8E2DE2 0%, #FF416C 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  position: relative;
+}
+
+/* ── Stage wrapper (for AnimatePresence) ── */
+.stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+/* ── Intro Stage ── */
+.intro-emoji {
+  font-size: 72px;
+  margin-bottom: 20px;
+}
+
+.intro-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.intro-subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.intro-features {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon.icon-pink {
+  background: rgba(255, 65, 108, 0.25);
+  color: #FF8FA3;
+}
+
+.feature-icon.icon-blue {
+  background: rgba(99, 179, 237, 0.25);
+  color: #90CDF4;
+}
+
+.feature-icon.icon-amber {
+  background: rgba(255, 215, 0, 0.25);
+  color: #FFD700;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feature-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.feature-text span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.intro-bottom {
+  width: 100%;
+}
+
+/* ── Input Stage ── */
+.input-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.input-subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  outline: none;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input-field:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Category Tabs ── */
+.category-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.category-tab {
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.category-tab:active {
+  transform: scale(0.96);
+}
+
+.category-tab.active {
+  background: #fff;
+  color: #8E2DE2;
+}
+
+/* ── Submit Button ── */
+.submit-button {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #8E2DE2;
+  transition: all 0.2s;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.submit-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Result Stage ── */
+.result-names {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.result-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.result-icon {
+  font-size: 28px;
+}
+
+.score-display {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.score-display.result-low {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.score-display.result-mid {
+  color: #fff;
+}
+
+.score-display.result-high {
+  color: #FFD700;
+  text-shadow: 0 0 24px rgba(255, 215, 0, 0.4);
+}
+
+.result-text {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.result-text.result-low {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.result-text.result-mid {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.result-text.result-high {
+  color: #FFD700;
+}
+
+/* ── Try Another Button ── */
+.try-another-button {
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.try-another-button:active {
+  transform: scale(0.96);
+}
+
+/* ── Bottom Nav ── */
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 16px 24px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  gap: 12px;
+}
+
+.nav-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.2s;
+}
+
+.nav-button:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.25);
+}
