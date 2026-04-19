@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Share2, Heart, Users, Briefcase } from 'lucide-react';
 import { useAppStore } from './store';
 import { calculateScore, getResultInfo, CATEGORY_ICON, CATEGORIES } from './utils';
+import { useTossInterstitialAd } from './hooks/useTossInterstitialAd';
+import { TossBannerAd } from './components/TossBannerAd';
+import { AD_CONFIG } from './constants/adConfig';
 import './App.css';
 
 function IntroStage() {
@@ -88,8 +91,8 @@ function IntroStage() {
   );
 }
 
-function InputStage() {
-  const { nameA, nameB, category, shouldFocusNameB, setNameA, setNameB, setCategory, showResult, clearFocusFlag } =
+function InputStage({ onShowResult }: { onShowResult: () => void }) {
+  const { nameA, nameB, category, shouldFocusNameB, setNameA, setNameB, setCategory, clearFocusFlag } =
     useAppStore();
   const nameBRef = useRef<HTMLInputElement>(null);
   const canSubmit = nameA.trim().length > 0 && nameB.trim().length > 0;
@@ -144,7 +147,7 @@ function InputStage() {
         ))}
       </div>
 
-      <button className="submit-button" disabled={!canSubmit} onClick={showResult}>
+      <button className="submit-button" disabled={!canSubmit} onClick={onShowResult}>
         결과 보기
       </button>
     </motion.div>
@@ -254,7 +257,16 @@ function BottomNav() {
 }
 
 export default function App() {
-  const { isIntro, stage } = useAppStore();
+  const { isIntro, stage, showResult } = useAppStore();
+  const { preload, showAd } = useTossInterstitialAd();
+
+  useEffect(() => {
+    preload();
+  }, [preload]);
+
+  const handleShowResult = () => {
+    showAd(() => showResult());
+  };
 
   return (
     <div className="app-container">
@@ -262,12 +274,17 @@ export default function App() {
         {isIntro ? (
           <IntroStage />
         ) : stage === 'input' ? (
-          <InputStage />
+          <InputStage onShowResult={handleShowResult} />
         ) : (
           <ResultStage />
         )}
       </AnimatePresence>
       {!isIntro && stage === 'result' && <BottomNav />}
+      {!isIntro && (
+        <div className="banner-fixed">
+          <TossBannerAd adGroupId={AD_CONFIG.BANNER} variant="expanded" height="96px" />
+        </div>
+      )}
     </div>
   );
 }
