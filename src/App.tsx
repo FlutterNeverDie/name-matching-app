@@ -23,7 +23,7 @@ function IntroStage() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.5 }}
       >
-        <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="우리 사이 궁합은?" />
+        <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="이름으로 보는 궁합 로고" />
       </motion.div>
 
       <motion.h1
@@ -32,7 +32,7 @@ function IntroStage() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        우리 사이 궁합은?
+        이름으로 보는 궁합
       </motion.h1>
 
       <motion.p
@@ -110,7 +110,6 @@ function InputStage() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
-      <h1 className="input-title">우리 사이 궁합은?</h1>
       <p className="input-subtitle">두 사람의 이름을 입력해 보세요</p>
 
       <div className="input-group">
@@ -231,7 +230,7 @@ function BottomNav() {
   const handleShare = async () => {
     try {
       await navigator.share({
-        title: '우리 사이 궁합은?',
+        title: '이름으로 보는 궁합',
         text: '이름으로 알아보는 우리 사이 궁합!',
         url: window.location.href,
       });
