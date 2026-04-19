@@ -150,6 +150,7 @@ function InputStage({ onShowResult }: { onShowResult: () => void }) {
       <button className="submit-button" disabled={!canSubmit} onClick={onShowResult}>
         결과 보기
       </button>
+      <p className="ad-notice">광고 시청 후 결과가 표시돼요 (약 5초)</p>
     </motion.div>
   );
 }
@@ -217,6 +218,7 @@ function ResultStage() {
               {CATEGORY_ICON[cat]} {cat}
             </button>
           ))}
+          <p className="ad-notice" style={{ width: '100%', textAlign: 'center' }}>광고 시청 후 결과가 표시돼요 (약 5초)</p>
         </div>
       ) : (
         <button className="try-another-button" onClick={() => setShowOtherCategories(true)}>
