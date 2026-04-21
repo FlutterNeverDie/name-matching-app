@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px calc(32px + 96px);
+  padding: 32px 24px calc(96px + env(safe-area-inset-bottom));
   position: relative;
 }
 
@@ -19,6 +19,8 @@
   width: 100%;
   max-width: 480px;
   z-index: 100;
+  background: #FF416C;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ── Stage wrapper (for AnimatePresence) ── */
@@ -64,7 +66,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .feature-item {
@@ -353,12 +355,11 @@
 /* ── Bottom Nav ── */
 .bottom-nav {
   position: absolute;
-  bottom: 96px;
+  bottom: calc(96px + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   display: flex;
   padding: 16px 24px;
-  padding-bottom: max(16px, env(safe-area-inset-bottom));
   gap: 12px;
 }
 

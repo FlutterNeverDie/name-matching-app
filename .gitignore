@@ -1,2 +1,8 @@
 public/.DS_Store
 .DS_Store
+
+/dist
+*.png
+
+.env.local
+.env

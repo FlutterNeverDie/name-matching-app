@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, Share2, Heart, Users, Briefcase } from 'lucide-react';
 import { useAppStore } from './store';
-import { calculateScore, getResultInfo, CATEGORY_ICON, CATEGORIES } from './utils';
+import { calculateScore, getResultInfo, CATEGORY_ICON, CATEGORIES, type Category } from './utils';
 import { useTossInterstitialAd } from './hooks/useTossInterstitialAd';
 import { TossBannerAd } from './components/TossBannerAd';
 import { AD_CONFIG } from './constants/adConfig';
@@ -155,8 +155,8 @@ function InputStage({ onShowResult }: { onShowResult: () => void }) {
   );
 }
 
-function ResultStage() {
-  const { nameA, nameB, category, setCategory, tryAnother } = useAppStore();
+function ResultStage({ onChangeCategory }: { onChangeCategory: (cat: Category) => void }) {
+  const { nameA, nameB, category } = useAppStore();
   const [showOtherCategories, setShowOtherCategories] = useState(false);
   const score = calculateScore(nameA, nameB, category);
   const { text, colorClass } = getResultInfo(score);
@@ -211,8 +211,8 @@ function ResultStage() {
               key={cat}
               className="category-tab active"
               onClick={() => {
-                setCategory(cat);
                 setShowOtherCategories(false);
+                onChangeCategory(cat);
               }}
             >
               {CATEGORY_ICON[cat]} {cat}
@@ -259,7 +259,7 @@ function BottomNav() {
 }
 
 export default function App() {
-  const { isIntro, stage, showResult } = useAppStore();
+  const { isIntro, stage, showResult, setCategory } = useAppStore();
   const { preload, showAd } = useTossInterstitialAd();
 
   useEffect(() => {
@@ -270,6 +270,10 @@ export default function App() {
     showAd(() => showResult());
   };
 
+  const handleChangeCategory = (cat: Category) => {
+    showAd(() => setCategory(cat));
+  };
+
   return (
     <div className="app-container">
       <AnimatePresence mode="wait">
@@ -278,7 +282,7 @@ export default function App() {
         ) : stage === 'input' ? (
           <InputStage onShowResult={handleShowResult} />
         ) : (
-          <ResultStage />
+          <ResultStage onChangeCategory={handleChangeCategory} />
         )}
       </AnimatePresence>
       {!isIntro && stage === 'result' && <BottomNav />}

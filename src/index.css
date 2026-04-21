@@ -14,6 +14,7 @@
 body {
   min-width: 320px;
   min-height: 100vh;
+  background: #FF416C;
 }
 
 @media (min-width: 481px) {
