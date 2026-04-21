@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { TossAds } from '@apps-in-toss/web-framework';
-import { AD_CONFIG } from '../constants/adConfig';
 
 interface TossBannerAdProps {
   adGroupId: string;
@@ -16,7 +15,6 @@ export const TossBannerAd: React.FC<TossBannerAdProps> = ({
   let resolvedHeight = height;
   if (!resolvedHeight) {
     if (variant === 'expanded') resolvedHeight = '96px';
-    else if (adGroupId === AD_CONFIG.NATIVE_IMAGE) resolvedHeight = '410px';
     else resolvedHeight = '180px';
   }
 

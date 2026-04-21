@@ -6,6 +6,4 @@ export const AD_CONFIG = {
   INTERSTITIAL: 'ait.v2.live.c30b53e895864f2a',
   // 일반 띠 배너: 하단 고정용 (높이 96px)
   BANNER: 'ait.v2.live.345769f40c0c47dd',
-  // 피드형/이미지 배너: 큰 사이즈용 (높이 410px)
-  NATIVE_IMAGE: 'ait.v2.live.690a70b8f7574d55',
 };
