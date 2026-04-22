@@ -230,14 +230,15 @@ function ResultStage({ onChangeCategory }: { onChangeCategory: (cat: Category) =
 }
 
 function BottomNav() {
-  const resetAll = useAppStore((s) => s.resetAll);
+  const { resetAll, nameA, nameB, category } = useAppStore();
+  const score = calculateScore(nameA, nameB, category);
 
   const handleShare = async () => {
     try {
       await navigator.share({
         title: '이름으로 보는 궁합',
-        text: '이름으로 알아보는 우리 사이 궁합!',
-        url: window.location.href,
+        text: `${nameA} & ${nameB}의 ${category} 궁합 점수는 ${score}점! 찰떡일까요?`,
+        url: 'https://minion.toss.im/ja9I4Djt',
       });
     } catch {
       // 사용자가 공유를 취소하거나 미지원 브라우저
